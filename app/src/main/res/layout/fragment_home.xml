@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:orientation="vertical"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/judul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+        <View
+            android:id="@+id/garis_judul"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/abu_abu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/judul"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kartu_masuk"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/garis_judul"
+            app:layout_constraintEnd_toStartOf="@+id/kartu_keluar"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/primary"
+            app:cardCornerRadius="14dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bar_chart"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="999"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Material In"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:textSize="10sp"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kartu_keluar"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/garis_judul"
+            app:layout_constraintStart_toEndOf="@+id/kartu_masuk"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/secondary"
+            app:cardCornerRadius="14dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bar_chart"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="999"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Material Out"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:textSize="10sp"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/kartu_masuk"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/abu_abu"
+            />
+
+        <TextView
+            android:id="@+id/type_waste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type Of Waste"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_type_waste"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/type_waste"
+            android:layout_marginTop="10dp"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_anorganik"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_cokelat"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Anorganic"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginHorizontal="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_organik"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_hijau_muda"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Organic"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginHorizontal="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_residu"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_biru"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Residu"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginHorizontal="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_other"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_merah"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Other"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/purpose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purpose"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scroll_type_waste"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_purpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/purpose"
+            android:layout_marginTop="10dp"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_anorganik"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_cokelat"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pakan Ternak"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginHorizontal="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_organik"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_hijau_muda"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Organic Farm"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginHorizontal="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_residu"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_biru"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TPA Termesi"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    app:contentPadding="8dp"
+                    android:backgroundTint="@color/abu_abu_muda"
+                    app:cardCornerRadius="16dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginHorizontal="6dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/waste_other"
+                            app:tint="@color/white"
+                            android:background="@drawable/rounded_merah"
+                            android:padding="5dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Taro"
+                            android:fontFamily="@font/nunito_regular"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="5dp"
+                            />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/material_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Material Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scroll_purpose"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/material_name"
+            android:layout_marginTop="10dp"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="20dp"
+                app:cardCornerRadius="16dp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    
+                    <ImageView
+                        android:id="@+id/iv_bottle"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/waste_other"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_title_bottle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_bottle"
+                        android:text="Glass Bottle"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title_bottle"
+                        app:layout_constraintStart_toEndOf="@id/iv_bottle"
+                        android:text="153 Kg"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:textSize="16sp"
+                        android:textColor="@color/tulisan_abu"
+                        android:layout_marginStart="10dp"
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail"
+                        android:backgroundTint="@color/primary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginEnd="20dp"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                app:cardCornerRadius="16dp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_lain"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/waste_other"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_title_lain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_lain"
+                        android:text="Glass Bottle"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title_lain"
+                        app:layout_constraintStart_toEndOf="@id/iv_lain"
+                        android:text="153 Kg"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:textSize="16sp"
+                        android:textColor="@color/tulisan_abu"
+                        android:layout_marginStart="10dp"
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail"
+                        android:backgroundTint="@color/primary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginEnd="20dp"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                app:cardCornerRadius="16dp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_lain2"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/waste_other"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="8dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_title_lain2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_lain2"
+                        android:text="Glass Bottle"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title_lain2"
+                        app:layout_constraintStart_toEndOf="@id/iv_lain2"
+                        android:text="153 Kg"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:textSize="16sp"
+                        android:textColor="@color/tulisan_abu"
+                        android:layout_marginStart="10dp"
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail"
+                        android:backgroundTint="@color/primary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginEnd="20dp"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
