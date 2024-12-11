@@ -50,12 +50,39 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="Status"
             android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
+            />
+
+        <AutoCompleteTextView
+            android:id="@+id/status_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:hint="Select Status"
+            android:background="@drawable/et_border"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:inputType="none"
+            android:dropDownHeight="wrap_content"
+            android:dropDownVerticalOffset="10dp"
+            android:focusable="false"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
             />
 
         <EditText
@@ -70,6 +97,15 @@
             android:background="@drawable/et_border"
             android:padding="15dp"
             />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,11 +126,13 @@
             android:hint="Select Material"
             android:background="@drawable/et_border"
             android:padding="15dp"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:dropDownHeight="wrap_content"
             android:dropDownVerticalOffset="10dp"
             android:inputType="none"
-            android:focusable="false" />
+            android:focusable="false"
+            android:clickable="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,11 +153,13 @@
             android:hint="Select Type"
             android:background="@drawable/et_border"
             android:padding="15dp"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:dropDownHeight="wrap_content"
             android:dropDownVerticalOffset="10dp"
             android:inputType="none"
-            android:focusable="false" />
+            android:focusable="false"
+            android:clickable="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
