@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +12,13 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.bangkit.ecovision.R
 import com.bangkit.ecovision.data.api.ApiConfig
 import com.bangkit.ecovision.data.repository.WasteRepository
-import com.bangkit.ecovision.data.response.get.Data
 import com.bangkit.ecovision.databinding.FragmentAnalyticsBinding
-import com.github.mikephil.charting.components.XAxis
+import com.bangkit.ecovision.ui.LoadingDialogFragment
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 
 class AnalyticsFragment : Fragment() {
 
@@ -31,6 +26,7 @@ class AnalyticsFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var analyticsViewModel: AnalyticsViewModel
+    private var loadingDialog: LoadingDialogFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +41,14 @@ class AnalyticsFragment : Fragment() {
 
         _binding = FragmentAnalyticsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        analyticsViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                showLoadingDialog()
+            } else {
+                hideLoadingDialog()
+            }
+        }
 
         // Di dalam metode onCreateView() pada AnalyticsFragment
         sharedViewModel.selectedType.observe(viewLifecycleOwner) { selectedType ->
@@ -125,6 +129,18 @@ class AnalyticsFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun showLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialogFragment()
+        }
+        loadingDialog?.show(childFragmentManager, "loadingDialog")
+    }
+
+    private fun hideLoadingDialog() {
+        loadingDialog?.dismiss()
+        loadingDialog = null
     }
 
     private fun disableScrollView(disable: Boolean) {

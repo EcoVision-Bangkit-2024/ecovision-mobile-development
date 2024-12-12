@@ -16,6 +16,7 @@ import com.bangkit.ecovision.MainActivity
 import com.bangkit.ecovision.data.api.ApiConfig
 import com.bangkit.ecovision.data.repository.WasteRepository
 import com.bangkit.ecovision.databinding.FragmentAddBinding
+import com.bangkit.ecovision.ui.LoadingDialogFragment
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Calendar
@@ -26,6 +27,7 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var addViewModel: AddViewModel
     private var currentImageUri: Uri? = null
+    private var loadingDialog: LoadingDialogFragment? = null
 
     private val pickImageLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -65,8 +67,11 @@ class AddFragment : Fragment() {
 
         addViewModel.submitStatus.observe(viewLifecycleOwner) { status ->
             val message = status.second
+            hideLoadingDialog()
             if (status.first) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                // Tampilkan dialog berhasil dengan custom view
+                val successDialog = SuccessDialogFragment()
+                successDialog.show(parentFragmentManager, "SuccessDialog")
                 resetForm()
             } else {
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show()
@@ -87,6 +92,7 @@ class AddFragment : Fragment() {
         binding.statusInput.setText("")
         binding.dateInput.setText("")
         binding.materialName.setText("")
+        binding.purpose.setText("")
         binding.type.setText("")
         binding.amount.setText("")
 
@@ -252,15 +258,30 @@ class AddFragment : Fragment() {
 
         if (keterangan.isNotEmpty() && date.isNotEmpty() && materialName.isNotEmpty() && type
             .isNotEmpty() && amount != null) {
+            showLoadingDialog()
             val photoFile = uriToFile(photoUri)
             if (photoFile.exists()) {
                 addViewModel.submitWasteWithImage(keterangan, date, materialName, purpose, type, amount, photoFile)
             } else {
                 Toast.makeText(context, "Gambar tidak valid", Toast.LENGTH_SHORT).show()
+                hideLoadingDialog()
             }
         } else {
             Toast.makeText(context, "Pastikan semua data telah diisi dengan benar", Toast.LENGTH_SHORT).show()
+            hideLoadingDialog()
         }
+    }
+
+    private fun showLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialogFragment()
+        }
+        loadingDialog?.show(parentFragmentManager, "LoadingDialog")
+    }
+
+    private fun hideLoadingDialog() {
+        loadingDialog?.dismiss()
+        loadingDialog = null
     }
 
     private fun uriToFile(selectedImage: Uri): File {

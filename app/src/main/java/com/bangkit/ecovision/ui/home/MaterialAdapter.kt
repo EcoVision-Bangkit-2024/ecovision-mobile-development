@@ -25,7 +25,14 @@ class MaterialAdapter(private val materials: List<Data>) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(material: Data) {
-            binding.tvTitle.text = material.materialName
+            // Truncate materialName to 15 characters and append "..."
+            val truncatedName = if (material.materialName.length > 15) {
+                material.materialName.take(15) + "..."
+            } else {
+                material.materialName
+            }
+
+            binding.tvTitle.text = truncatedName
             binding.amount.text = "Amount: ${material.amount} KG"
         }
     }

@@ -1,17 +1,14 @@
 package com.bangkit.ecovision.ui.analytics
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.ecovision.R
 import com.bangkit.ecovision.data.repository.WasteRepository
-import com.bangkit.ecovision.data.response.get.Data
 import com.github.mikephil.charting.data.BarEntry
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import androidx.lifecycle.MediatorLiveData
 
 
 class AnalyticsViewModel(private val wasteRepository: WasteRepository) : ViewModel() {
@@ -40,6 +37,9 @@ class AnalyticsViewModel(private val wasteRepository: WasteRepository) : ViewMod
     private val _sumKeluar = MutableLiveData<Float>()
     val sumKeluar: LiveData<Float> = _sumKeluar
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun loadBase64ImageFromFile(context: Context) {
         try {
             val inputStream = context.resources.openRawResource(R.raw.image64)
@@ -65,7 +65,9 @@ class AnalyticsViewModel(private val wasteRepository: WasteRepository) : ViewMod
     }
 
     fun loadWasteData(selectedType: String?) {
+        _isLoading.value = true
         wasteRepository.getWastes { success, _, response ->
+            _isLoading.value = false
             if (success && response != null) {
                 val filteredData = response.data.filter { it.type == selectedType }
 

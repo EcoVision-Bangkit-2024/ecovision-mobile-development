@@ -4,4 +4,8 @@
     <string name="title_add">Add</string>
     <string name="title_notifications">Notifications</string>
     <string name="analytics">Analytics</string>
+
+    <string name="success">Berhasil</string>
+    <string name="success_message">Data berhasil dikirim.</string>
+    <string name="ok">OK</string>
 </resources>
