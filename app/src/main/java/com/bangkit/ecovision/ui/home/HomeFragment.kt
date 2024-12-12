@@ -41,15 +41,15 @@ class HomeFragment : Fragment() {
 
         fetchMaterialsFromApi()
 
-        binding.kartuMasuk.setOnClickListener {
-            (activity as MainActivity).allowAnalyticsAccess()
-
-            findNavController().navigate(R.id.navigation_analytics)
-
-            // Mengatur item BottomNavigationView ke Analytics
-            val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
-            navView.selectedItemId = R.id.navigation_analytics
-        }
+//        binding.kartuMasuk.setOnClickListener {
+//            (activity as MainActivity).allowAnalyticsAccess()
+//
+//            findNavController().navigate(R.id.navigation_analytics)
+//
+//            // Mengatur item BottomNavigationView ke Analytics
+//            val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
+//            navView.selectedItemId = R.id.navigation_analytics
+//        }
 
         // Pada HomeFragment.kt
         binding.nonAnorganic.setOnClickListener {
@@ -65,8 +65,6 @@ class HomeFragment : Fragment() {
             navView.selectedItemId = R.id.navigation_analytics
         }
 
-
-
         return root
     }
 
@@ -79,6 +77,12 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     val materials = response.body()?.data ?: emptyList()
                     setupRecyclerView(materials)
+
+                    val totalMasuk = calculateSumMasuk(materials)
+                    binding.materialIn.text = totalMasuk.toString()
+
+                    val totalKeluar = calculateSumKeluar(materials)
+                    binding.materialOut.text = totalKeluar.toString()
                 } else {
                     // Handle error
                     binding.materialRecyclerView.visibility = View.GONE
@@ -129,13 +133,37 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun calculateSumMasuk(materials: List<Data>): Float {
+        var totalMasuk = 0f // Initialize a variable to hold the sum
+
+        // Iterate over the materials and add the 'amount' if 'keterangan' is "Masuk"
+        materials.forEach { material ->
+            if (material.keterangan == "Masuk") {
+                totalMasuk += material.amount?.toFloat() ?: 0f
+            }
+        }
+
+        return totalMasuk
+    }
+
+    private fun calculateSumKeluar(materials: List<Data>): Float {
+        var totalKeluar = 0f // Initialize a variable to hold the sum
+
+        // Iterate over the materials and add the 'amount' if 'keterangan' is "Keluar"
+        materials.forEach { material ->
+            if (material.keterangan == "Keluar") {
+                totalKeluar += material.amount?.toFloat() ?: 0f
+            }
+        }
+
+        return totalKeluar
+    }
 
     override fun onResume() {
         super.onResume()
         // Menonaktifkan akses AnalyticsFragment saat kembali ke HomeFragment
         (activity as MainActivity).disallowAnalyticsAccess()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
