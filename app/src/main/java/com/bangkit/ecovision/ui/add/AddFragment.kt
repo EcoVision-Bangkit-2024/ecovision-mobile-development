@@ -55,6 +55,7 @@ class AddFragment : Fragment() {
         setupStatusDropdown()
         setupDatePicker()
         setupMaterialDropdown()
+        setupPurposeDropdown()
         setupTypeDropdown()
         setupImageUpload()
 
@@ -149,7 +150,6 @@ class AddFragment : Fragment() {
         }
     }
 
-
     private fun setupMaterialDropdown() {
         // Data for the material dropdown
         val materials = listOf("Slipper", "Candle", "Plastic bottle", "Plastic Bag Liner",
@@ -174,6 +174,32 @@ class AddFragment : Fragment() {
         // Listener to handle selected item
         binding.materialName.setOnItemClickListener { _, _, position, _ ->
             val selectedMaterial = materials[position]
+            // Do something with the selection
+        }
+    }
+
+    private fun setupPurposeDropdown() {
+        // Data for the material dropdown
+        val purpose = listOf("Taro", "TPA Termesi", "Pakan Ternak", "Organic Farm")
+
+        // Adapter for AutoCompleteTextView
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            purpose
+        )
+
+        // Set adapter to AutoCompleteTextView
+        binding.purpose.setAdapter(adapter)
+
+        // Show dropdown when the user clicks the field
+        binding.purpose.setOnClickListener {
+            binding.purpose.showDropDown()
+        }
+
+        // Listener to handle selected item
+        binding.purpose.setOnItemClickListener { _, _, position, _ ->
+            val selectedMaterial = purpose[position]
             // Do something with the selection
         }
     }
@@ -214,6 +240,7 @@ class AddFragment : Fragment() {
         val keterangan = binding.statusInput.text.toString()
         val date = binding.dateInput.text.toString()
         val materialName = binding.materialName.text.toString()
+        val purpose = binding.purpose.text.toString()
         val type = binding.type.text.toString()
         val amount = binding.amount.text.toString().toIntOrNull()
         val photoUri = currentImageUri
@@ -227,8 +254,7 @@ class AddFragment : Fragment() {
             .isNotEmpty() && amount != null) {
             val photoFile = uriToFile(photoUri)
             if (photoFile.exists()) {
-                addViewModel.submitWasteWithImage(keterangan, date, materialName, type, amount,
-                    photoFile)
+                addViewModel.submitWasteWithImage(keterangan, date, materialName, purpose, type, amount, photoFile)
             } else {
                 Toast.makeText(context, "Gambar tidak valid", Toast.LENGTH_SHORT).show()
             }

@@ -16,11 +16,12 @@ class AddViewModel(private val repository: WasteRepository) : ViewModel() {
         keterangan: String,
         date: String,
         materialName: String,
+        purpose: String,
         type: String,
         amount: Int,
         imageFile: File?
     ) {
-        repository.createWasteWithImage(keterangan, date, materialName, type, amount, imageFile) { isSuccess, message ->
+        repository.createWasteWithImage(keterangan, date, materialName, purpose, type, amount, imageFile) { isSuccess, message ->
             _submitStatus.value = Pair(isSuccess, message)
         }
     }

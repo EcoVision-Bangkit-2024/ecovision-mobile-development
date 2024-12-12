@@ -3,9 +3,10 @@ package com.bangkit.ecovision.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.ecovision.data.response.get.Data
 import com.bangkit.ecovision.databinding.ItemMaterialBinding
 
-class MaterialAdapter(private val materials: List<String>) :
+class MaterialAdapter(private val materials: List<Data>) :
     RecyclerView.Adapter<MaterialAdapter.MaterialViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaterialViewHolder {
@@ -23,14 +24,9 @@ class MaterialAdapter(private val materials: List<String>) :
     class MaterialViewHolder(private val binding: ItemMaterialBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(material: String) {
-            val shortenedMaterial = if (material.length > 17) {
-                material.substring(0, 15) + "..."
-
-            } else {
-                material
-            }
-            binding.tvTitle.text = shortenedMaterial
+        fun bind(material: Data) {
+            binding.tvTitle.text = material.materialName
+            binding.amount.text = "Amount: ${material.amount} KG"
         }
     }
 }

@@ -17,6 +17,7 @@ interface ApiService {
         @Part("keterangan") keterangan: RequestBody,
         @Part("date") date: RequestBody,
         @Part("materialName") materialName: RequestBody,
+        @Part("purpose") purpose: RequestBody,
         @Part("type") type: RequestBody,
         @Part("amount") amount: RequestBody,
         @Part photo: MultipartBody.Part?

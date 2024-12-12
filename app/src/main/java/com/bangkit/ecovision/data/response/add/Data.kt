@@ -14,6 +14,8 @@ data class Data(
     val keterangan: String,
     @SerializedName("materialName")
     val materialName: String,
+    @SerializedName("purpose")
+    val purpose: String,
     @SerializedName("photoUrl")
     val photoUrl: String,
     @SerializedName("type")

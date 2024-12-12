@@ -164,6 +164,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Purpose"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            />
+
+        <AutoCompleteTextView
+            android:id="@+id/purpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:hint="Select Purpose"
+            android:background="@drawable/et_border"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:dropDownHeight="wrap_content"
+            android:dropDownVerticalOffset="10dp"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Amount"
             android:fontFamily="@font/nunito_semibold"
             android:textColor="@color/black"
