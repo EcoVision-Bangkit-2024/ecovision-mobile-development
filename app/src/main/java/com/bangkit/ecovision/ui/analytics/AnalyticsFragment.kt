@@ -128,6 +128,24 @@ class AnalyticsFragment : Fragment() {
             disableScrollView(false)
         }
 
+        // Menangani klik pada chartMasuk
+        binding.chartMasuk.setOnClickListener {
+            // Mengambil data chart yang relevan
+            val chartData = analyticsViewModel.chartDataMasuk.value ?: emptyList()
+            val materialNames = analyticsViewModel.materialNamesMasuk.value ?: emptyList()
+            val chartDialog = ChartDialogFragment(chartData, materialNames)
+            chartDialog.show(childFragmentManager, "chartMasukDialog")
+        }
+
+        // Menangani klik pada chartKeluar
+        binding.chartKeluar.setOnClickListener {
+            // Mengambil data chart yang relevan
+            val chartData = analyticsViewModel.chartDataKeluar.value ?: emptyList()
+            val materialNames = analyticsViewModel.materialNamesKeluar.value ?: emptyList()
+            val chartDialog = ChartDialogFragment(chartData, materialNames)
+            chartDialog.show(childFragmentManager, "chartKeluarDialog")
+        }
+
         return root
     }
 
