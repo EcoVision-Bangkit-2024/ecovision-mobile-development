@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.ecovision.data.repository.WasteRepository
-import com.bangkit.ecovision.data.model.WasteModel
 import java.io.File
 
 class AddViewModel(private val repository: WasteRepository) : ViewModel() {

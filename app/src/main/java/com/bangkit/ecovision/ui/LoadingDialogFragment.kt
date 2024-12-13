@@ -9,7 +9,7 @@ class LoadingDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val progressDialog = android.app.AlertDialog.Builder(requireContext())
-            .setView(R.layout.dialog_loading) // You can create a custom layout for loading
+            .setView(R.layout.dialog_loading)
             .setCancelable(false)
             .create()
 

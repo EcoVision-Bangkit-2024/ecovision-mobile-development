@@ -69,7 +69,6 @@ class AddFragment : Fragment() {
             val message = status.second
             hideLoadingDialog()
             if (status.first) {
-                // Tampilkan dialog berhasil dengan custom view
                 val successDialog = SuccessDialogFragment()
                 successDialog.show(parentFragmentManager, "SuccessDialog")
                 resetForm()
@@ -83,7 +82,6 @@ class AddFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Menonaktifkan akses AnalyticsFragment saat kembali ke HomeFragment
         (activity as MainActivity).disallowAnalyticsAccess()
     }
 
