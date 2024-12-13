@@ -1,5 +1,6 @@
 package com.bangkit.ecovision.ui.analytics
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -9,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ScrollView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.ecovision.data.api.ApiConfig
@@ -19,6 +20,9 @@ import com.bangkit.ecovision.ui.LoadingDialogFragment
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
 class AnalyticsFragment : Fragment() {
 
@@ -35,9 +39,9 @@ class AnalyticsFragment : Fragment() {
     ): View {
         val repository = WasteRepository(ApiConfig.getApiService())
         val factory = AnalyticsViewModelFactory(repository)
-        analyticsViewModel = ViewModelProvider(this, factory).get(AnalyticsViewModel::class.java)
+        analyticsViewModel = ViewModelProvider(this, factory)[AnalyticsViewModel::class.java]
 
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
         _binding = FragmentAnalyticsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -50,37 +54,31 @@ class AnalyticsFragment : Fragment() {
             }
         }
 
-        // Di dalam metode onCreateView() pada AnalyticsFragment
         sharedViewModel.selectedType.observe(viewLifecycleOwner) { selectedType ->
-            // Mengubah teks pada TextView sesuai dengan nilai selectedType
             binding.title.text = selectedType
         }
 
-
-        // Load the base64 image from the file
         analyticsViewModel.loadBase64ImageFromFile(requireContext())
 
-        analyticsViewModel.loadBase64AnorganicImageFromFile(requireContext())
+        val type = sharedViewModel.selectedType.value
+        analyticsViewModel.loadBase64TypeImageFromFile(requireContext(), type)
 
-        // Observe the LiveData for base64 image string
         analyticsViewModel.base64Image.observe(viewLifecycleOwner) { base64Image ->
             val bitmap = decodeBase64ToBitmap(base64Image)
             binding.IVDay.setImageBitmap(bitmap)
         }
 
-        analyticsViewModel.base64AnorganicImage.observe(viewLifecycleOwner) { base64AnorganicImage ->
+        analyticsViewModel.base64TypeImage.observe(viewLifecycleOwner) { base64AnorganicImage ->
             val bitmap = decodeBase64ToBitmap(base64AnorganicImage)
-            binding.IVAnorganic.setImageBitmap(bitmap)  // Assuming IVAnorganic is the ImageView for the anorganic image
+            binding.IVType.setImageBitmap(bitmap)
         }
 
-        // Observe data for "Masuk" chart
         analyticsViewModel.chartDataMasuk.observe(viewLifecycleOwner) { chartData ->
             analyticsViewModel.materialNamesMasuk.observe(viewLifecycleOwner) { materialNames ->
                 updateBarChart(binding.chartMasuk, chartData, materialNames)
             }
         }
 
-        // Observe data for "Keluar" chart
         analyticsViewModel.chartDataKeluar.observe(viewLifecycleOwner) { chartData ->
             analyticsViewModel.materialNamesKeluar.observe(viewLifecycleOwner) { materialNames ->
                 updateBarChart(binding.chartKeluar, chartData, materialNames)
@@ -88,22 +86,18 @@ class AnalyticsFragment : Fragment() {
         }
 
         analyticsViewModel.sumMasuk.observe(viewLifecycleOwner) { sumMasuk ->
-            // Update the TextView with the sum
             binding.materialIn.text = sumMasuk.toString()
         }
 
         analyticsViewModel.sumKeluar.observe(viewLifecycleOwner) { sumKeluar ->
-            binding.materialOut.text = sumKeluar.toString()  // Update material_out TextView
+            binding.materialOut.text = sumKeluar.toString()
         }
 
-        // Load data
         analyticsViewModel.loadWasteData(sharedViewModel.selectedType.value)
 
-        // Handle click on ImageView to show PhotoView
         binding.IVDay.setOnClickListener {
             val drawable = binding.IVDay.drawable
             if (drawable != null) {
-                // Show the PhotoView and disable ScrollView scroll
                 binding.photoView.visibility = View.VISIBLE
                 binding.photoView.setImageDrawable(drawable)
                 binding.photoView.setScaleType(ImageView.ScaleType.FIT_CENTER)
@@ -111,10 +105,9 @@ class AnalyticsFragment : Fragment() {
             }
         }
 
-        binding.IVAnorganic.setOnClickListener {
-            val drawable = binding.IVAnorganic.drawable
+        binding.IVType.setOnClickListener {
+            val drawable = binding.IVType.drawable
             if (drawable != null) {
-                // Show the PhotoView and disable ScrollView scroll
                 binding.photoView.visibility = View.VISIBLE
                 binding.photoView.setImageDrawable(drawable)
                 binding.photoView.setScaleType(ImageView.ScaleType.FIT_CENTER)
@@ -123,28 +116,41 @@ class AnalyticsFragment : Fragment() {
         }
 
         binding.photoView.setOnClickListener {
-            // Hide PhotoView and enable ScrollView scroll
             binding.photoView.visibility = View.GONE
             disableScrollView(false)
         }
 
-        // Menangani klik pada chartMasuk
-        binding.chartMasuk.setOnClickListener {
-            // Mengambil data chart yang relevan
-            val chartData = analyticsViewModel.chartDataMasuk.value ?: emptyList()
-            val materialNames = analyticsViewModel.materialNamesMasuk.value ?: emptyList()
-            val chartDialog = ChartDialogFragment(chartData, materialNames)
-            chartDialog.show(childFragmentManager, "chartMasukDialog")
-        }
+        binding.chartMasuk.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                if (e != null && h != null) {
+                    val index = e.x.toInt()
+                    val materialName = analyticsViewModel.materialNamesMasuk.value?.getOrNull(index)
+                    val amount = analyticsViewModel.chartDataMasuk.value?.getOrNull(index)?.y
 
-        // Menangani klik pada chartKeluar
-        binding.chartKeluar.setOnClickListener {
-            // Mengambil data chart yang relevan
-            val chartData = analyticsViewModel.chartDataKeluar.value ?: emptyList()
-            val materialNames = analyticsViewModel.materialNamesKeluar.value ?: emptyList()
-            val chartDialog = ChartDialogFragment(chartData, materialNames)
-            chartDialog.show(childFragmentManager, "chartKeluarDialog")
-        }
+                    if (materialName != null && amount != null) {
+                        showMaterialAmount(materialName, amount)
+                    }
+                }
+            }
+
+            override fun onNothingSelected() {}
+        })
+
+        binding.chartKeluar.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                if (e != null && h != null) {
+                    val index = e.x.toInt()
+                    val materialName = analyticsViewModel.materialNamesKeluar.value?.getOrNull(index)
+                    val amount = analyticsViewModel.chartDataKeluar.value?.getOrNull(index)?.y
+
+                    if (materialName != null && amount != null) {
+                        showMaterialAmount(materialName, amount)
+                    }
+                }
+            }
+
+            override fun onNothingSelected() {}
+        })
 
         return root
     }
@@ -161,14 +167,13 @@ class AnalyticsFragment : Fragment() {
         loadingDialog = null
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun disableScrollView(disable: Boolean) {
-        val scrollView = binding.root as ScrollView
+        val scrollView = binding.root
         if (disable) {
-            // Disable ScrollView scroll by intercepting touch events
-            scrollView.setOnTouchListener { _, _ -> true } // Disables touch interaction
+            scrollView.setOnTouchListener { _, _ -> true }
         } else {
-            // Re-enable ScrollView touch interaction
-            scrollView.setOnTouchListener(null) // Removes the touch listener
+            scrollView.setOnTouchListener(null)
         }
     }
 
@@ -184,20 +189,14 @@ class AnalyticsFragment : Fragment() {
     }
 
     private fun updateBarChart(barChart: com.github.mikephil.charting.charts.BarChart, chartData: List<BarEntry>, materialNames: List<String>) {
-        // Create BarDataSet from the chartData
-        val chartEntries = chartData.mapIndexed { index, barEntry -> barEntry }
+        val chartEntries = chartData.mapIndexed { _, barEntry -> barEntry }
 
-        // Create BarDataSet for the chart
         val barDataSet = BarDataSet(chartEntries, "")
 
-        // Assign random colors to the bars
         val colors = chartData.map { generateRandomColor() }
-        barDataSet.colors = colors // Set colors for the bars
+        barDataSet.colors = colors
 
-        // Set legend for each color with the corresponding material name
-        val legendLabels = materialNames
-        val legendEntries = legendLabels.mapIndexed { index, materialName ->
-            // Create LegendEntry for each color and corresponding material name
+        val legendEntries = materialNames.mapIndexed { index, materialName ->
             com.github.mikephil.charting.components.LegendEntry(
                 materialName,
                 com.github.mikephil.charting.components.Legend.LegendForm.SQUARE,
@@ -208,35 +207,33 @@ class AnalyticsFragment : Fragment() {
             )
         }
 
-        // Set the custom legend
         barChart.legend.setCustom(legendEntries)
 
-        // Set the data and refresh the chart
         val barData = BarData(barDataSet)
         barChart.data = barData
 
-        // Disable X-Axis and remove grid lines
-        barChart.xAxis.setEnabled(false)
+        barChart.xAxis.isEnabled = false
         barChart.xAxis.setDrawGridLines(false)
 
         barChart.description.isEnabled = false
         barChart.setFitBars(true)
         barChart.invalidate()
 
-        // Set chart axis properties
         barChart.axisLeft.axisMinimum = 0f
         barChart.axisRight.isEnabled = false
     }
 
-
-    // Function to generate a random color
     private fun generateRandomColor(): Int {
         val random = java.util.Random()
-        val alpha = random.nextInt(156) + 100 // Alpha (0 to 255)
-        val red = random.nextInt(256)   // Red (0 to 255)
-        val green = random.nextInt(256) // Green (0 to 255)
-        val blue = random.nextInt(256)  // Blue (0 to 255)
-        return Color.argb(alpha, red, green, blue) // Generate random color with alpha, red, green, blue
+        val alpha = random.nextInt(156) + 100
+        val red = random.nextInt(256)
+        val green = random.nextInt(256)
+        val blue = random.nextInt(256)
+        return Color.argb(alpha, red, green, blue)
+    }
+
+    private fun showMaterialAmount(materialName: String, amount: Float) {
+        Toast.makeText(context, "Material: $materialName, Amount: $amount", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

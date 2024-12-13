@@ -85,7 +85,6 @@ class AddFragment : Fragment() {
         (activity as MainActivity).disallowAnalyticsAccess()
     }
 
-
     private fun resetForm() {
         binding.statusInput.setText("")
         binding.dateInput.setText("")
@@ -101,7 +100,7 @@ class AddFragment : Fragment() {
 
 
     private fun setupStatusDropdown() {
-        val statuses = listOf("Masuk", "Keluar")
+        val statuses = listOf("Waste In", "Waste Out")
 
         val adapter = ArrayAdapter(
             requireContext(),

@@ -16,8 +16,8 @@ class AnalyticsViewModel(private val wasteRepository: WasteRepository) : ViewMod
     private val _base64Image = MutableLiveData<String>()
     val base64Image: LiveData<String> = _base64Image
 
-    private val _base64AnorganicImage = MutableLiveData<String>()
-    val base64AnorganicImage: LiveData<String> = _base64AnorganicImage
+    private val _base64TypeImage = MutableLiveData<String>()
+    val base64TypeImage: LiveData<String> = _base64TypeImage
 
     private val _chartDataMasuk = MutableLiveData<List<BarEntry>>()
     val chartDataMasuk: LiveData<List<BarEntry>> = _chartDataMasuk
@@ -42,7 +42,7 @@ class AnalyticsViewModel(private val wasteRepository: WasteRepository) : ViewMod
 
     fun loadBase64ImageFromFile(context: Context) {
         try {
-            val inputStream = context.resources.openRawResource(R.raw.image64)
+            val inputStream = context.resources.openRawResource(R.raw.jumlah)
             val reader = BufferedReader(InputStreamReader(inputStream))
             val base64String = reader.readLine()
             _base64Image.value = base64String
@@ -52,17 +52,29 @@ class AnalyticsViewModel(private val wasteRepository: WasteRepository) : ViewMod
         }
     }
 
-    fun loadBase64AnorganicImageFromFile(context: Context) {
+    fun loadBase64TypeImageFromFile(context: Context, type: String?) {
         try {
-            val inputStream = context.resources.openRawResource(R.raw.anorganic)
-            val reader = BufferedReader(InputStreamReader(inputStream))
-            val base64String = reader.readLine()
-            _base64AnorganicImage.value = base64String
-            reader.close()
+            val fileName = when (type?.lowercase()) {
+                "non organic" -> "anorganic"
+                else -> type?.lowercase()
+            }
+
+            val resId = context.resources.getIdentifier(fileName, "raw", context.packageName)
+
+            if (resId != 0) {
+                val inputStream = context.resources.openRawResource(resId)
+                val reader = BufferedReader(InputStreamReader(inputStream))
+                val base64String = reader.readLine()
+                _base64TypeImage.value = base64String
+                reader.close()
+            } else {
+                println("File not found for type: $type")
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
+
 
     fun loadWasteData(selectedType: String?) {
         _isLoading.value = true
@@ -71,8 +83,9 @@ class AnalyticsViewModel(private val wasteRepository: WasteRepository) : ViewMod
             if (success && response != null) {
                 val filteredData = response.data.filter { it.type == selectedType }
 
-                val dataMasuk = filteredData.filter { it.keterangan == "Masuk" && it.amount > 0 }
-                val dataKeluar = filteredData.filter { it.keterangan == "Keluar" && it.amount > 0 }
+                val dataMasuk = filteredData.filter { it.keterangan == "Waste In" && it.amount > 0 }
+                val dataKeluar = filteredData.filter { it.keterangan == "Waste Out" && it.amount >
+                        0 }
 
                 // Grouping data and summing amounts using forEach
                 val groupedMasuk = dataMasuk.groupBy { it.materialName }.mapValues { entry ->

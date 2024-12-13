@@ -78,7 +78,7 @@ class HomeViewModel : ViewModel() {
     private fun calculateSumMasuk(materials: List<Data>): Float {
         var totalMasuk = 0f
         materials.forEach { material ->
-            if (material.keterangan == "Masuk") {
+            if (material.keterangan == "Waste In") {
                 totalMasuk += material.amount?.toFloat() ?: 0f
             }
         }
@@ -88,7 +88,7 @@ class HomeViewModel : ViewModel() {
     private fun calculateSumKeluar(materials: List<Data>): Float {
         var totalKeluar = 0f
         materials.forEach { material ->
-            if (material.keterangan == "Keluar") {
+            if (material.keterangan == "Waste Out") {
                 totalKeluar += material.amount?.toFloat() ?: 0f
             }
         }

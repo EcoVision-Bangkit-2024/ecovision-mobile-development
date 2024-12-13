@@ -59,17 +59,34 @@ class HomeFragment : Fragment() {
         }
 
         binding.nonAnorganic.setOnClickListener {
-            (activity as MainActivity).allowAnalyticsAccess()
+            handleAnalyticsNavigation("Non Organic")
+        }
 
-            sharedViewModel.setSelectedType("Non Organic")
-            findNavController().navigate(R.id.navigation_analytics)
+        binding.organic.setOnClickListener {
+            handleAnalyticsNavigation("Organic")
+        }
 
-            val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
-            navView.selectedItemId = R.id.navigation_analytics
+        binding.residu.setOnClickListener {
+            handleAnalyticsNavigation("Residue")
+        }
+
+        binding.other.setOnClickListener {
+            handleAnalyticsNavigation("Other")
         }
 
         return root
     }
+
+    private fun handleAnalyticsNavigation(type: String) {
+        (activity as MainActivity).allowAnalyticsAccess()
+
+        sharedViewModel.setSelectedType(type)
+        findNavController().navigate(R.id.navigation_analytics)
+
+        val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view)
+        navView.selectedItemId = R.id.navigation_analytics
+    }
+
 
     private fun setupRecyclerView(materials: List<Data>) {
         val adapter = MaterialAdapter(materials)
@@ -86,6 +103,11 @@ class HomeFragment : Fragment() {
 
     private fun dismissLoadingDialog() {
         loadingDialog?.dismiss()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sharedViewModel.setSelectedType(null)
     }
 
     override fun onDestroyView() {

@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class SharedViewModel : ViewModel() {
-    private val _selectedType = MutableLiveData<String>()
-    val selectedType: LiveData<String> get() = _selectedType
+    private val _selectedType = MutableLiveData<String?>()
+    val selectedType: LiveData<String?> get() = _selectedType
 
-    fun setSelectedType(type: String) {
+    fun setSelectedType(type: String?) {
         _selectedType.value = type
     }
 }

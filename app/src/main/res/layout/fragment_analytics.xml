@@ -1,266 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.analytics.AnalyticsFragment"
-    android:orientation="vertical"
-    android:fillViewport="true">
+    tools:context=".ui.analytics.AnalyticsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/judul"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Analytics"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_height="wrap_content">
 
-        <View
-            android:id="@+id/garis_judul"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/abu_abu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/judul"
-            />
+            <TextView
+                android:id="@+id/judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Analytics"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/black"
-            android:text="Judul"
-            android:textSize="30sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/garis_judul"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            <View
+                android:id="@+id/garis_judul"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/abu_abu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/judul"
+                />
 
-        <LinearLayout
-            android:id="@+id/material_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            >
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
+                android:text="Judul"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/garis_judul"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/kartu_masuk"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="2dp"
-                app:strokeColor="@color/primary"
-                android:layout_marginEnd="10dp">
+            <LinearLayout
+                android:id="@+id/material_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                >
 
-                <!-- Konten MaterialCardView -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/kartu_masuk"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/primary"
+                    android:layout_marginEnd="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/bar_chart"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        app:tint="@color/primary" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/material_in"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="999"
-                        android:textColor="@color/primary"
-                        android:fontFamily="@font/nunito_extrabold"
-                        android:textSize="20sp"
-                        android:layout_gravity="center" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/inbox_in"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="7dp"
+                            app:tint="@color/primary" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Material In"
-                        android:textColor="@color/primary"
-                        android:fontFamily="@font/nunito_semibold"
-                        android:textSize="10sp"
-                        android:layout_gravity="center" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:id="@+id/material_in"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="..."
+                            android:textColor="@color/primary"
+                            android:fontFamily="@font/nunito_extrabold"
+                            android:textSize="20sp"
+                            android:layout_gravity="center" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/kartu_keluar"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="2dp"
-                app:strokeColor="@color/secondary"
-                android:layout_marginStart="10dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Material In"
+                            android:textColor="@color/primary"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textSize="15sp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Konten MaterialCardView -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/kartu_keluar"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/secondary"
+                    android:layout_marginStart="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/bar_chart"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        app:tint="@color/secondary" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/material_out"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/nunito_extrabold"
-                        android:text="999"
-                        android:textColor="@color/secondary"
-                        android:textSize="20sp" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/inbox_out"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="7dp"
+                            app:tint="@color/secondary" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Material Out"
-                        android:textColor="@color/secondary"
-                        android:fontFamily="@font/nunito_semibold"
-                        android:textSize="10sp"
-                        android:layout_gravity="center" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:id="@+id/material_out"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/nunito_extrabold"
+                            android:text="..."
+                            android:textColor="@color/secondary"
+                            android:textSize="20sp" />
 
-        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Material Out"
+                            android:textColor="@color/secondary"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:textSize="15sp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:id="@+id/analytics_chart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Analytics chart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/material_card"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            />
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/IV_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:contentDescription="Base64 Image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/analytics_chart"/>
+            <TextView
+                android:id="@+id/analytics_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Analytics chart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_card"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
 
-        <ImageView
-            android:id="@+id/IV_anorganic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:contentDescription="Base64 Image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IV_day"/>
+            <ImageView
+                android:id="@+id/IV_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:contentDescription="Base64 Image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/analytics_chart"/>
 
-        <io.getstream.photoview.PhotoView
-            android:id="@+id/photoView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:background="#80000000"
-            android:scaleType="centerInside"
-            android:elevation="10dp"
-            android:contentDescription="PhotoView for zooming image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            <ImageView
+                android:id="@+id/IV_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:contentDescription="Base64 Image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/IV_day"/>
 
-        <TextView
-            android:id="@+id/in_chart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Material In"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/IV_anorganic"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            />
+            <TextView
+                android:id="@+id/in_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Material In"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IV_type"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chartMasuk"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginHorizontal="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/in_chart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-            />
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chartMasuk"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/in_chart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                />
 
-        <TextView
-            android:id="@+id/out_chart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Material Out"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chartMasuk"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            />
+            <TextView
+                android:id="@+id/out_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Material Out"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chartMasuk"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chartKeluar"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/out_chart" />
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chartKeluar"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/out_chart" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <io.getstream.photoview.PhotoView
+        android:id="@+id/photoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#80000000"
+        android:scaleType="centerInside"
+        android:elevation="10dp"
+        android:contentDescription="PhotoView for zooming image"
+        />
+
+</FrameLayout>
